@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Joshua Bakata — Computer Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fcfcfb;
+    --ink: #0c0c0d;
+    --muted: #6e6e72;
+    --faint: #9a9a9f;
+    --line: rgba(12,12,13,0.14);
+    --line-soft: rgba(12,12,13,0.07);
+    --hover: rgba(12,12,13,0.035);
+    --net: 12,12,13;
+    --serif: "Spectral", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  [data-theme="dark"] {
+    --bg: #0b0b0c;
+    --ink: #f3f3f0;
+    --muted: #97979d;
+    --faint: #66666c;
+    --line: rgba(243,243,240,0.16);
+    --line-soft: rgba(243,243,240,0.08);
+    --hover: rgba(243,243,240,0.045);
+    --net: 243,243,240;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  #net {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: clamp(40px, 9vh, 110px) 28px 120px;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(56px, 12vh, 120px);
+  }
+  .mark {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .toggle {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .toggle:hover { color: var(--ink); border-color: var(--ink); }
+  .toggle .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    border: 1px solid currentColor;
+    background: var(--ink);
+    transition: background 0.25s ease;
+  }
+  [data-theme="dark"] .toggle .dot { background: transparent; }
+
+  /* ---------- hero ---------- */
+  .hero { margin-bottom: clamp(64px, 13vh, 130px); }
+  .hero h1 {
+    font-weight: 300;
+    font-size: clamp(40px, 8vw, 68px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    margin: 0 0 22px;
+  }
+  .hero .lede {
+    font-size: clamp(18px, 2.4vw, 21px);
+    color: var(--muted);
+    font-weight: 400;
+    max-width: 30em;
+    margin: 0 0 34px;
+    text-wrap: pretty;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 22px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+  }
+  .meta-row a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .meta-row a:hover { border-color: var(--ink); }
+  .meta-row .cv {
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    padding: 7px 15px;
+    color: var(--ink);
+  }
+  .meta-row .cv:hover { background: var(--ink); color: var(--bg); }
+
+  .hint-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+  .hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  .hint .pm {
+    display: inline-flex;
+    width: 17px; height: 17px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    position: relative;
+    flex: none;
+  }
+  .hint .pm::before { content: ""; position: absolute; top: 8px; left: 4px; width: 9px; height: 1px; background: currentColor; }
+  .hint .pm::after { content: ""; position: absolute; left: 8px; top: 4px; width: 1px; height: 9px; background: currentColor; }
+  .expand-all {
+    appearance: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding: 0 0 3px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .expand-all:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* ---------- sections ---------- */
+  .section { margin-bottom: clamp(48px, 8vh, 78px); }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head .idx {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+    letter-spacing: 0.08em;
+  }
+  .section-head h2 {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  /* ---------- collapsible item ---------- */
+  details.item {
+    border-bottom: 1px solid var(--line-soft);
+  }
+  details.item:last-child { border-bottom: none; }
+  details.item > summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 22px 8px 22px 0;
+    transition: background 0.2s ease;
+    outline: none;
+  }
+  details.item > summary::-webkit-details-marker { display: none; }
+  details.item > summary:hover { background: var(--hover); }
+  .chev {
+    grid-column: 1;
+    align-self: center;
+    width: 20px; height: 20px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    position: relative;
+    color: var(--muted);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), color 0.2s ease, border-color 0.2s ease;
+  }
+  .chev::before, .chev::after {
+    content: "";
+    position: absolute;
+    background: currentColor;
+    transition: opacity 0.3s ease;
+  }
+  .chev::before { top: 9px; left: 5px; width: 10px; height: 1px; }
+  .chev::after { left: 9px; top: 5px; width: 1px; height: 10px; }
+  details[open] > summary .chev { color: var(--ink); border-color: var(--ink); transform: rotate(90deg); }
+  details[open] > summary .chev::after { opacity: 0; }
+  details.item > summary:hover .chev { color: var(--ink); border-color: var(--ink); }
+
+  .item-title {
+    grid-column: 2;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .item-sub {
+    display: block;
+    font-size: 14.5px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 3px;
+  }
+  .item-meta {
+    grid-column: 3;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+    text-align: right;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    padding-top: 4px;
+  }
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px 9px;
+    vertical-align: middle;
+  }
+
+  /* expanding body */
+  .body-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  details[open] .body-wrap { grid-template-rows: 1fr; }
+  .body-inner { overflow: hidden; }
+  .body-pad {
+    padding: 2px 8px 30px 38px;
+    max-width: 56ch;
+  }
+  .body-pad p {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.66;
+    text-wrap: pretty;
+  }
+  .body-pad p strong { color: var(--ink); font-weight: 500; }
+  .body-pad p:last-child { margin-bottom: 0; }
+  .facts {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .facts li {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .facts li .v {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .placeholder {
+    font-style: italic;
+    color: var(--faint) !important;
+    font-size: 14.5px !important;
+  }
+  .links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .links a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease;
+  }
+  .links a:hover { border-color: var(--ink); }
+
+  footer {
+    margin-top: clamp(60px, 12vh, 120px);
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--faint);
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  @media (max-width: 560px) {
+    details.item > summary { grid-template-columns: 28px 1fr; gap: 12px; }
+    .item-meta { grid-column: 2; grid-row: 2; text-align: left; padding-top: 8px; }
+    .body-pad { padding-left: 30px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="net"></canvas>
+<main class="wrap">
+  <div class="topbar">
+    <span class="mark">JB — 2026</span>
+    <button class="toggle" id="themeToggle" aria-label="Toggle colour theme">
+      <span class="dot"></span><span id="themeLabel">Light</span>
+    </button>
+  </div>
+
+  <header class="hero">
+    <h1>Joshua Bakata</h1>
+    <p class="lede">Computer scientist.</p>
+    <div class="meta-row">
+      <a class="cv" href="assets/Joshua-Bakata-CV.pdf" id="cvBtn" target="_blank" rel="noopener">Download CV ↓</a>
+      <a href="mailto:J.N.Bakata1-24@student.lboro.ac.uk">Email</a>
+      <a href="https://github.com/jbn-creator/" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <!-- ============ EDUCATION ============ -->
+  <section class="section" data-screen-label="Education">
+    <div class="section-head">
+      <span class="idx">01</span>
+      <h2>Education</h2>
+    </div>
+
+    <details class="item" open>
+      <summary>
+        <span class="chev"></span>
+        <span class="item-title">Loughborough University
+          <span class="item-sub">BSc Computer Science · 82% average</span>
+        </span>
+        <span class="item-meta">2024 — present</span>
+      </summary>
+      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
+        <p>Active member of the university <strong>Debating Club</strong>.</p>
+        <ul class="facts">
+          <li><span>Mathematics for Computer Science</span><span class="v">87%</span></li>
+          <li><span>Formal Languages &amp; Theory of Computation</span><span class="v">89%</span></li>
+          <li><span>AI Methods</span><span class="v">100%</span></li>
+        </ul>
+        <p>My thesis will focus on <strong>Lifelong Learning in RL</strong>.</p>
+      </div></div></div>
+    </details>
+
+    <details class="item">
+      <summary>
+        <span class="chev"></span>
+        <span class="item-title">Buckswood School
+          <span class="item-sub">A Levels · top 10% of UK Maths students</span>
+        </span>
+        <span class="item-meta">A Levels</span>
+      </summary>
+      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
+        <p>Finished in the <strong>top 10% of all A Level Mathematics students in the UK</strong>. Held senior leadership roles and was recognised across both academic and school life.</p>
+        <ul class="facts">
+          <li><span>Student of the Year</span><span class="v">Award</span></li>
+          <li><span>Maths Student of the Year</span><span class="v">Award</span></li>
+          <li><span>Prefect &amp; House Captain</span><span class="v">Leadership</span></li>
+          <li><span>Debating Club</span><span class="v">Member</span></li>
+        </ul>
+        <ul class="facts">
+          <li><span>A Levels</span><span class="v">A*AB</span></li>
+        </ul>
+      </div></div></div>
+    </details>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section class="section" data-screen-label="Research">
+    <div class="section-head">
+      <span class="idx">02</span>
+      <h2>Research</h2>
+    </div>
+
+    <details class="item" open>
+      <summary>
+        <span class="chev"></span>
+        <span class="item-title">Predicting Power-Grid Outages with Deep Learning
+          <span class="item-sub">Supervised by Dr Shirin Dora</span>
+        </span>
+        <span class="item-meta">Ongoing</span>
+      </summary>
+      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
+        <p>Using deep learning to predict power-grid outages. Reliable early forecasting matters because it lets operators take preemptive action such as switching to backup systems, redirecting load, or simply preparing. The work draws on <strong>LSTMs and RNNs</strong>, which are well-suited to the long, noisy temporal patterns that grid signals exhibit, and explores how the framing of the prediction task itself shapes how well a model can learn it.</p>
+      </div></div></div>
+    </details>
+  </section>
+
+  <!-- ============ PROFESSIONAL ============ -->
+  <section class="section" data-screen-label="Professional">
+    <div class="section-head">
+      <span class="idx">03</span>
+      <h2>Professional</h2>
+    </div>
+
+    <details class="item" open>
+      <summary>
+        <span class="chev"></span>
+        <span class="item-title">Software Engineering Intern — Bitmovin
+          <span class="item-sub">Video infrastructure · <span class="tag">YC S15</span></span>
+        </span>
+        <span class="item-meta">Incoming</span>
+      </summary>
+      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
+        <p>Incoming <strong>SWE Intern at Bitmovin</strong> (Y Combinator S15), working within video encoding and streaming infrastructure.</p>
+      </div></div></div>
+    </details>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section class="section" data-screen-label="Projects">
+    <div class="section-head">
+      <span class="idx">04</span>
+      <h2>Projects</h2>
+    </div>
+
+    <details class="item" open>
+      <summary>
+        <span class="chev"></span>
+        <span class="item-title">Battlefield
+          <span class="item-sub">RL simulation of global geopolitics</span>
+        </span>
+        <span class="item-meta">Ongoing</span>
+      </summary>
+      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
+        <p>Battlefield is a <strong>multi-agent reinforcement learning environment</strong> where countries act as agents competing over resources: capital, land, people, oil under constraints that loosely model international competition. The project explores what strategies emerge when agents with different priors and reward weightings interact in a shared zero-sum economy.</p>
+        <p>The motivating question came from listening to Jiang Xuequin's game-theoretic analyses of geopolitics: if states really were independent agents maximising under a zero-sum game, what would optimal play look like, and would it resemble anything we recognise? The honest answer is probably no since the environment is far too simple to model real strategic behaviour. But the simpler question is interesting in itself: what does multi-agent RL converge to under these constraints, and how do those equilibria shift as you change the resource structure or the reward shape if they do at all?</p>
+      </div></div></div>
+    </details>
+
+    <details class="item">
+      <summary>
+        <span class="chev"></span>
+        <span class="item-title">Neural Network from Scratch — MNIST
+          <span class="item-sub">No frameworks · 96.85% accuracy</span>
+        </span>
+        <span class="item-meta">96.85%</span>
+      </summary>
+      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
+        <p>Built and trained a <strong>neural network from scratch</strong> on the MNIST handwritten-digit dataset — forward pass, backpropagation and gradient descent implemented by hand.</p>
+        <ul class="facts">
+          <li><span>Architecture</span><span class="v">784 → 512 → 512 → 128 → 10</span></li>
+          <li><span>Hidden activations</span><span class="v">ReLU</span></li>
+          <li><span>Output</span><span class="v">Softmax</span></li>
+          <li><span>Loss</span><span class="v">Cross-entropy</span></li>
+          <li><span>Built with</span><span class="v">NumPy</span></li>
+          <li><span>Final test accuracy</span><span class="v">96.85%</span></li>
+        </ul>
+        <p>NumPy handled the elementary ops and linear algebra; everything else was implemented by hand.</p>
+        <div class="links"><a href="https://github.com/jbn-creator/Neural-Network-From-Scratch" target="_blank" rel="noopener">Repository →</a></div>
+      </div></div></div>
+    </details>
+
+    <details class="item">
+      <summary>
+        <span class="chev"></span>
+        <span class="item-title">Offered
+          <span class="item-sub">120 users · 3,000+ internships posted</span>
+        </span>
+        <span class="item-meta">Product</span>
+      </summary>
+      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
+        <p><strong>Offered</strong> is a platform to help students find <strong>niche internships across the UK</strong> that rarely surface on the big job boards. Grew to <strong>120 users</strong> with over <strong>3,000 internships posted</strong>. No longer maintained.</p>
+        <ul class="facts">
+          <li><span>Stack</span><span class="v">React · Tailwind · Flask · Supabase</span></li>
+          <li><span>LLM</span><span class="v">Gemini</span></li>
+        </ul>
+        <div class="links"><a href="https://offered.org.uk/" target="_blank" rel="noopener">offered.org.uk →</a></div>
+      </div></div></div>
+    </details>
+  </section>
+
+  <footer>
+    <span>© 2026 Joshua Bakata</span>
+    <a href="mailto:J.N.Bakata1-24@student.lboro.ac.uk">J.N.Bakata1-24@student.lboro.ac.uk</a>
+  </footer>
+</main>
+
+<script>
+/* ---------- theme ---------- */
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const label = document.getElementById('themeLabel');
+  const saved = localStorage.getItem('jb-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+  const sync = () => { label.textContent = root.getAttribute('data-theme') === 'dark' ? 'Dark' : 'Light'; };
+  sync();
+  btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('jb-theme', next);
+    sync();
+  });
+})();
+
+/* ---------- expand / collapse all ---------- */
+(function () {
+  const btn = document.getElementById('expandAll');
+  if (!btn) return;
+  const items = () => Array.from(document.querySelectorAll('details.item'));
+  const allOpen = () => items().every(d => d.open);
+  function refresh() {
+    const open = allOpen();
+    btn.textContent = open ? 'Collapse all' : 'Expand all';
+    btn.setAttribute('aria-expanded', String(open));
+  }
+  btn.addEventListener('click', () => {
+    const open = !allOpen();
+    items().forEach(d => { d.open = open; });
+    refresh();
+  });
+  document.addEventListener('toggle', (e) => {
+    if (e.target.classList && e.target.classList.contains('item')) refresh();
+  }, true);
+  refresh();
+})();
+
+/* ---------- node / wire background ---------- */
+(function () {
+  const canvas = document.getElementById('net');
+  const ctx = canvas.getContext('2d');
+  let w, h, dpr, nodes = [], raf;
+  const COUNT_BASE = 0.00009; // nodes per px²
+  const LINK_DIST = 170;
+
+  function netColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue('--net').trim() || '12,12,13';
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const target = Math.max(26, Math.min(80, Math.round(w * h * COUNT_BASE)));
+    nodes = [];
+    for (let i = 0; i < target; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.16,
+        vy: (Math.random() - 0.5) * 0.16,
+        r: Math.random() * 1.4 + 0.7
+      });
+    }
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, w, h);
+    const c = netColor();
+    for (const n of nodes) {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
+      if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
+    }
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = Math.hypot(dx, dy);
+        if (d < LINK_DIST) {
+          const o = (1 - d / LINK_DIST) * 0.28;
+          ctx.strokeStyle = 'rgba(' + c + ',' + o.toFixed(3) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    for (const n of nodes) {
+      ctx.fillStyle = 'rgba(' + c + ',0.5)';
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  resize();
+  if (reduce) { step(); cancelAnimationFrame(raf); } else { step(); }
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+})();
+</script>
+</body>
+</html>
