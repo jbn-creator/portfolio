@@ -118,7 +118,10 @@
   }
   .entry[hidden] { display: none; }
 
-  .card { border: 1px solid transparent; }
+  .card {
+    border: 1px solid transparent;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  }
   .card > summary {
     list-style: none;
     cursor: pointer;
@@ -129,6 +132,7 @@
   .card:hover, .card[open] {
     border-color: var(--ink);
     box-shadow: 5px 5px 0 var(--ink);
+    transform: translate(-1px, -1px);
   }
   .card > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
@@ -176,7 +180,8 @@
     .theme { margin-left: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .body { transition: none; }
+    .body, .card { transition: none; }
+    .card:hover, .card[open] { transform: none; }
   }
 </style>
 </head>
