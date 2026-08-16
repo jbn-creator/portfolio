@@ -113,10 +113,6 @@
     100% { transform: scale(1); }
   }
 
-  .contact { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
-  .contact a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); padding-bottom: 2px; }
-  .contact a:hover { border-color: var(--ink); }
-
   /* ---------- timeline ---------- */
   .timeline {
     list-style: none;
@@ -255,7 +251,7 @@
     <li class="entry" data-tab="research">
       <details class="card">
         <summary>
-          <span class="row"><span class="t">Predicting Power-Grid Outages with Deep Learning</span><span class="d">Mar — Aug 2026</span></span>
+          <span class="row"><span class="t">Predicting Power-Grid Outages with Deep Learning</span><span class="d">Ongoing</span></span>
           <span class="s">Forecasting grid failure from long, noisy temporal signals. Supervised by Dr Shirin Dora.</span>
         </summary>
         <div class="body"><div class="inner"><div class="pad">
@@ -280,19 +276,17 @@
     <li class="entry" data-tab="about">
       <details class="card">
         <summary>
-          <span class="row"><span class="t">Loughborough University</span><span class="d">2024 — 2027</span></span>
-          <span class="s">BSc (Hons) Computer Science &amp; AI. First-year average 82%, second-year average 83%.</span>
+          <span class="row"><span class="t">Loughborough University</span><span class="d">2024 — present</span></span>
+          <span class="s">BSc Computer Science, 82% average. Thesis on lifelong learning in RL.</span>
         </summary>
         <div class="body"><div class="inner"><div class="pad">
           <p>Active member of the university <strong>Debating Club</strong>.</p>
           <ul class="facts">
-            <li><span>Formal Methods</span><span class="v">92%</span></li>
-            <li><span>AI Methods</span><span class="v">90%</span></li>
-            <li><span>Formal Languages &amp; Automata</span><span class="v">89%</span></li>
-            <li><span>Embedded Systems</span><span class="v">88%</span></li>
-            <li><span>Mathematics</span><span class="v">87%</span></li>
+            <li><span>Mathematics for Computer Science</span><span class="v">87%</span></li>
+            <li><span>Formal Languages &amp; Theory of Computation</span><span class="v">89%</span></li>
+            <li><span>AI Methods</span><span class="v">100%</span></li>
           </ul>
-          <p>Thesis: <strong>Lifelong Reinforcement Learning</strong>, supervised by Dr Andrea Soltoggio.</p>
+          <p>My thesis will focus on <strong>Lifelong Learning in RL</strong>.</p>
         </div></div></div>
       </details>
     </li>
@@ -300,32 +294,8 @@
     <li class="entry" data-tab="projects">
       <details class="card">
         <summary>
-          <span class="row"><span class="t">LyricForge — HackNotts</span><span class="d">2025</span></span>
-          <span class="s">An AI remix agent that rewrites song lyrics to a chosen theme and regenerates the vocals.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Built at <strong>HackNotts 2025</strong>. Gemini rewrites the lyrics to a chosen theme, ElevenLabs regenerates the vocals, and the new take is aligned back to the original with <strong>dynamic time warping</strong>.</p>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="projects">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">G-Research Coding Challenge</span><span class="d">2025</span></span>
-          <span class="s">Modelling and forecasting time-series data with ARMA models in Python.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Applied statistical reasoning to real-world datasets, fitting and forecasting with <strong>ARMA models</strong>.</p>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="projects">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Neural Network from Scratch — MNIST</span><span class="d">Oct — Dec 2025</span></span>
-          <span class="s">Forward pass, backpropagation and gradient descent implemented by hand. No ML libraries. 96.85% test accuracy.</span>
+          <span class="row"><span class="t">Neural Network from Scratch — MNIST</span><span class="d">96.85%</span></span>
+          <span class="s">Forward pass, backpropagation and gradient descent implemented by hand. No frameworks.</span>
         </summary>
         <div class="body"><div class="inner"><div class="pad">
           <ul class="facts">
@@ -336,7 +306,7 @@
             <li><span>Built with</span><span class="v">NumPy</span></li>
             <li><span>Final test accuracy</span><span class="v">96.85%</span></li>
           </ul>
-          <p>NumPy handled the elementary ops and linear algebra; backpropagation, gradient descent and the activation functions were coded from first principles. Experiments evaluated training stability, learning rates and accuracy on unseen data.</p>
+          <p>NumPy handled the elementary ops and linear algebra; everything else was implemented by hand.</p>
           <div class="links"><a href="https://github.com/jbn-creator/Neural-Network-From-Scratch" target="_blank" rel="noopener">Repository →</a></div>
         </div></div></div>
       </details>
@@ -345,12 +315,11 @@
     <li class="entry" data-tab="projects">
       <details class="card">
         <summary>
-          <span class="row"><span class="t">Offered</span><span class="d">Jun — Aug 2025</span></span>
+          <span class="row"><span class="t">Offered</span><span class="d">Archived</span></span>
           <span class="s">Niche UK internships that never surface on the big job boards. 120 users, 3,000+ roles posted.</span>
         </summary>
         <div class="body"><div class="inner"><div class="pad">
-          <p><strong>Offered</strong> is a student platform for finding internships, with <strong>LLM integration that scores the strength of a profile</strong>. Grew to <strong>120 users</strong> with over <strong>3,000 internships posted</strong>. No longer maintained.</p>
-          <p>Supabase (PostgreSQL) handled authentication and data access; Flask microservices covered secure API routing, session handling and asynchronous tasks; the frontend was React + Tailwind. Deployed end-to-end and onboarded early users while iterating on product feedback.</p>
+          <p><strong>Offered</strong> helped students find niche internships across the UK. Grew to <strong>120 users</strong> with over <strong>3,000 internships posted</strong>. No longer maintained.</p>
           <ul class="facts">
             <li><span>Stack</span><span class="v">React · Tailwind · Flask · Supabase</span></li>
             <li><span>LLM</span><span class="v">Gemini</span></li>
@@ -363,27 +332,10 @@
     <li class="entry" data-tab="about">
       <details class="card">
         <summary>
-          <span class="row"><span class="t">Civic &amp; Military Service</span><span class="d">Rwanda</span></span>
-          <span class="s">Led a 52-member platoon through field operations.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Completed the Civic and Military Service in Rwanda and led a <strong>52-member platoon</strong> through field operations, improving coordination, morale and operational flow.</p>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="about">
-      <details class="card">
-        <summary>
           <span class="row"><span class="t">Buckswood School</span><span class="d">2022 — 2024</span></span>
           <span class="s">A Levels in Mathematics, French and Business. Hastings, East Sussex.</span>
         </summary>
         <div class="body"><div class="inner"><div class="pad">
-          <ul class="facts">
-            <li><span>Mathematics</span><span class="v">A*</span></li>
-            <li><span>French</span><span class="v">A</span></li>
-            <li><span>Business</span><span class="v">B</span></li>
-          </ul>
           <p>Held senior leadership roles and was recognised across both academic and school life.</p>
           <ul class="facts">
             <li><span>Student of the Year</span><span class="v">Award</span></li>
@@ -395,10 +347,6 @@
       </details>
     </li>
   </ul>
-
-  <div class="contact">
-    <a href="assets/Joshua-Bakata-CV.pdf" target="_blank" rel="noopener">Download CV ↓</a>
-  </div>
 
   <footer>
     <span>© 2026 Joshua Bakata</span>
