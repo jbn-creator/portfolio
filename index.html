@@ -3,668 +3,359 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Joshua Bakata — Computer Scientist</title>
+<title>Joshua Bakata</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #fcfcfb;
-    --ink: #0c0c0d;
-    --muted: #6e6e72;
-    --faint: #9a9a9f;
-    --line: rgba(12,12,13,0.14);
-    --line-soft: rgba(12,12,13,0.07);
-    --hover: rgba(12,12,13,0.035);
-    --net: 12,12,13;
-    --serif: "Spectral", Georgia, "Times New Roman", serif;
+    --bg: #f2f0ea;
+    --ink: #14140f;
+    --muted: #6f6f66;
+    --faint: #9a9a91;
+    --line: rgba(20,20,15,0.22);
+    --line-soft: rgba(20,20,15,0.12);
+    --serif: "Spectral", "Times New Roman", Times, serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
   [data-theme="dark"] {
-    --bg: #0b0b0c;
-    --ink: #f3f3f0;
-    --muted: #97979d;
-    --faint: #66666c;
-    --line: rgba(243,243,240,0.16);
-    --line-soft: rgba(243,243,240,0.08);
-    --hover: rgba(243,243,240,0.045);
-    --net: 243,243,240;
+    --bg: #101010;
+    --ink: #edebe4;
+    --muted: #918f87;
+    --faint: #6a6963;
+    --line: rgba(237,235,228,0.26);
+    --line-soft: rgba(237,235,228,0.13);
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background-color: var(--bg);
+    background: var(--bg);
     color: var(--ink);
-    font-family: var(--serif);
-    font-weight: 400;
-    line-height: 1.6;
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    transition: background-color 0.5s ease, color 0.5s ease;
-  }
-
-  #net {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
   }
 
   .wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: clamp(40px, 9vh, 110px) 28px 120px;
+    max-width: 880px;
+    padding: clamp(32px, 6vh, 64px) 28px 120px clamp(28px, 5vw, 64px);
   }
 
-  /* ---------- top bar ---------- */
-  .topbar {
+  /* ---------- header ---------- */
+  .top {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: clamp(56px, 12vh, 120px);
+    align-items: baseline;
+    gap: clamp(20px, 5vw, 64px);
+    margin-bottom: 44px;
+    flex-wrap: wrap;
   }
-  .mark {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .toggle {
-    appearance: none;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    padding: 7px 13px;
-    border-radius: 999px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.25s ease, border-color 0.25s ease;
-  }
-  .toggle:hover { color: var(--ink); border-color: var(--ink); }
-  .toggle .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    border: 1px solid currentColor;
-    background: var(--ink);
-    transition: background 0.25s ease;
-  }
-  [data-theme="dark"] .toggle .dot { background: transparent; }
-
-  /* ---------- hero ---------- */
-  .hero { margin-bottom: clamp(64px, 13vh, 130px); }
-  .hero h1 {
-    font-weight: 300;
-    font-size: clamp(40px, 8vw, 68px);
-    line-height: 1.02;
-    letter-spacing: -0.015em;
-    margin: 0 0 22px;
-  }
-  .hero .lede {
-    font-size: clamp(18px, 2.4vw, 21px);
-    color: var(--muted);
+  .wordmark {
+    font-family: var(--serif);
     font-weight: 400;
-    max-width: 30em;
-    margin: 0 0 34px;
+    font-size: clamp(30px, 4.4vw, 42px);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .tabs { display: flex; gap: 22px; }
+  .tabs a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 15px;
+    border-bottom: 1px solid var(--line-soft);
+    padding-bottom: 3px;
+  }
+  .tabs a:hover { color: var(--ink); border-color: var(--line); }
+  .tabs a[aria-current="page"] { color: var(--ink); border-bottom: 1.5px solid var(--ink); }
+
+  .theme {
+    margin-left: auto;
+    appearance: none;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font: inherit;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 4px 11px;
+    cursor: pointer;
+  }
+  .theme:hover { color: var(--ink); border-color: var(--ink); }
+
+  .intro {
+    max-width: 54ch;
+    margin: 0 0 52px;
     text-wrap: pretty;
   }
-  .meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 22px;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    letter-spacing: 0.02em;
-  }
-  .meta-row a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-  .meta-row a:hover { border-color: var(--ink); }
-  .meta-row .cv {
-    border: 1px solid var(--ink);
-    border-radius: 999px;
-    padding: 7px 15px;
-    color: var(--ink);
-  }
-  .meta-row .cv:hover { background: var(--ink); color: var(--bg); }
+  .intro a { color: var(--ink); }
+  .contact { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 18px; font-size: 14px; }
+  .contact a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); padding-bottom: 2px; }
+  .contact a:hover { border-color: var(--ink); }
 
-  .hint-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 26px;
-    flex-wrap: wrap;
-  }
-  .hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.04em;
-    color: var(--faint);
-  }
-  .hint .pm {
-    display: inline-flex;
-    width: 17px; height: 17px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    position: relative;
-    flex: none;
-  }
-  .hint .pm::before { content: ""; position: absolute; top: 8px; left: 4px; width: 9px; height: 1px; background: currentColor; }
-  .hint .pm::after { content: ""; position: absolute; left: 8px; top: 4px; width: 1px; height: 9px; background: currentColor; }
-  .expand-all {
-    appearance: none;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--line);
-    padding: 0 0 3px;
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-  .expand-all:hover { color: var(--ink); border-color: var(--ink); }
-
-  /* ---------- sections ---------- */
-  .section { margin-bottom: clamp(48px, 8vh, 78px); }
-  .section-head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    padding-bottom: 14px;
-    margin-bottom: 6px;
-    border-bottom: 1px solid var(--line);
-  }
-  .section-head .idx {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--faint);
-    letter-spacing: 0.08em;
-  }
-  .section-head h2 {
-    font-family: var(--mono);
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    margin: 0;
-    color: var(--ink);
-  }
-
-  /* ---------- collapsible item ---------- */
-  details.item {
-    border-bottom: 1px solid var(--line-soft);
-  }
-  details.item:last-child { border-bottom: none; }
-  details.item > summary {
+  /* ---------- timeline ---------- */
+  .timeline {
     list-style: none;
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 22px 1fr auto;
-    align-items: baseline;
-    gap: 16px;
-    padding: 22px 8px 22px 0;
-    transition: background 0.2s ease;
-    outline: none;
-  }
-  details.item > summary::-webkit-details-marker { display: none; }
-  details.item > summary:hover { background: var(--hover); }
-  .chev {
-    grid-column: 1;
-    align-self: center;
-    width: 20px; height: 20px;
-    border: 1px solid var(--line);
-    border-radius: 50%;
+    margin: 0;
+    padding: 0 0 0 34px;
     position: relative;
-    color: var(--muted);
-    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), color 0.2s ease, border-color 0.2s ease;
   }
-  .chev::before, .chev::after {
+  .timeline::before {
     content: "";
     position: absolute;
-    background: currentColor;
-    transition: opacity 0.3s ease;
+    left: 0; top: 12px; bottom: 12px;
+    width: 1px;
+    background: var(--line-soft);
   }
-  .chev::before { top: 9px; left: 5px; width: 10px; height: 1px; }
-  .chev::after { left: 9px; top: 5px; width: 1px; height: 10px; }
-  details[open] > summary .chev { color: var(--ink); border-color: var(--ink); transform: rotate(90deg); }
-  details[open] > summary .chev::after { opacity: 0; }
-  details.item > summary:hover .chev { color: var(--ink); border-color: var(--ink); }
+  .entry { position: relative; margin-bottom: 6px; }
+  .entry::before {
+    content: "";
+    position: absolute;
+    left: -38px; top: 22px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .entry[hidden] { display: none; }
 
-  .item-title {
-    grid-column: 2;
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-  }
-  .item-sub {
-    display: block;
-    font-size: 14.5px;
-    color: var(--muted);
-    font-weight: 400;
-    margin-top: 3px;
-  }
-  .item-meta {
-    grid-column: 3;
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--faint);
-    text-align: right;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-    padding-top: 4px;
-  }
-  .tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 2px 9px;
-    vertical-align: middle;
-  }
-
-  /* expanding body */
-  .body-wrap {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.4s cubic-bezier(0.4,0,0.2,1);
-  }
-  details[open] .body-wrap { grid-template-rows: 1fr; }
-  .body-inner { overflow: hidden; }
-  .body-pad {
-    padding: 2px 8px 30px 38px;
-    max-width: 56ch;
-  }
-  .body-pad p {
-    margin: 0 0 14px;
-    color: var(--muted);
-    font-size: 16px;
-    line-height: 1.66;
-    text-wrap: pretty;
-  }
-  .body-pad p strong { color: var(--ink); font-weight: 500; }
-  .body-pad p:last-child { margin-bottom: 0; }
-  .facts {
+  .card { border: 1px solid transparent; }
+  .card > summary {
     list-style: none;
-    margin: 0 0 16px;
-    padding: 0;
-    border-top: 1px solid var(--line-soft);
+    cursor: pointer;
+    display: block;
+    padding: 12px 16px 14px;
   }
+  .card > summary::-webkit-details-marker { display: none; }
+  .card:hover, .card[open] {
+    border-color: var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+  .card > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  .row { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
+  .t { font-weight: 500; }
+  .d { color: var(--muted); font-size: 13.5px; white-space: nowrap; }
+  .s { display: block; color: var(--muted); margin-top: 4px; text-wrap: pretty; }
+
+  .body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
+  .card[open] .body { grid-template-rows: 1fr; }
+  .inner { overflow: hidden; }
+  .pad { padding: 4px 16px 18px; max-width: 62ch; }
+  .pad p { margin: 0 0 12px; color: var(--muted); text-wrap: pretty; }
+  .pad p:last-child { margin-bottom: 0; }
+  .pad strong { color: var(--ink); font-weight: 500; }
+
+  .facts { list-style: none; margin: 0 0 14px; padding: 0; border-top: 1px solid var(--line-soft); }
   .facts li {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 9px 0;
+    display: flex; justify-content: space-between; gap: 18px;
+    padding: 7px 0;
     border-bottom: 1px solid var(--line-soft);
-    font-size: 15px;
-    color: var(--ink);
+    font-size: 14px;
   }
-  .facts li .v {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--muted);
-    white-space: nowrap;
-  }
-  .placeholder {
-    font-style: italic;
-    color: var(--faint) !important;
-    font-size: 14.5px !important;
-  }
-  .links {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-  }
-  .links a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease;
-  }
+  .facts li .v { color: var(--muted); text-align: right; }
+
+  .links { margin-top: 12px; font-size: 14px; }
+  .links a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); padding-bottom: 2px; }
   .links a:hover { border-color: var(--ink); }
 
   footer {
-    margin-top: clamp(60px, 12vh, 120px);
-    padding-top: 22px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.04em;
+    margin-top: 72px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    font-size: 13px;
     color: var(--faint);
   }
   footer a { color: var(--muted); text-decoration: none; }
   footer a:hover { color: var(--ink); }
 
-  @media (max-width: 560px) {
-    details.item > summary { grid-template-columns: 28px 1fr; gap: 12px; }
-    .item-meta { grid-column: 2; grid-row: 2; text-align: left; padding-top: 8px; }
-    .body-pad { padding-left: 30px; }
+  @media (max-width: 620px) {
+    .row { flex-direction: column; gap: 2px; }
+    .timeline { padding-left: 24px; }
+    .entry::before { left: -28px; }
+    .theme { margin-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .body { transition: none; }
   }
 </style>
 </head>
 <body>
-<canvas id="net"></canvas>
-<main class="wrap">
-  <div class="topbar">
-    <span class="mark">JB — 2026</span>
-    <button class="toggle" id="themeToggle" aria-label="Toggle colour theme">
-      <span class="dot"></span><span id="themeLabel">Light</span>
-    </button>
-  </div>
-
-  <header class="hero">
-    <h1>Joshua Bakata</h1>
-    <p class="lede">Computer scientist.</p>
-    <div class="meta-row">
-      <a class="cv" href="assets/Joshua-Bakata-CV.pdf" id="cvBtn" target="_blank" rel="noopener">Download CV ↓</a>
-      <a href="mailto:J.N.Bakata1-24@student.lboro.ac.uk">Email</a>
-      <a href="https://github.com/jbn-creator/" target="_blank" rel="noopener">GitHub</a>
-    </div>
+<div class="wrap">
+  <header class="top">
+    <h1 class="wordmark">Joshua Bakata</h1>
+    <nav class="tabs" id="tabs">
+      <a href="#home">Home</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="theme" id="themeToggle" aria-label="Toggle colour theme">Dark</button>
   </header>
 
-  <!-- ============ EDUCATION ============ -->
-  <section class="section" data-screen-label="Education">
-    <div class="section-head">
-      <span class="idx">01</span>
-      <h2>Education</h2>
-    </div>
+  <p class="intro" id="intro">
+    Joshua Bakata is a computer scientist reading BSc Computer Science at Loughborough
+    University. He works on reinforcement learning and deep learning for temporal
+    prediction, and is an incoming software engineering intern at Bitmovin.
+  </p>
 
-    <details class="item" open>
-      <summary>
-        <span class="chev"></span>
-        <span class="item-title">Loughborough University
-          <span class="item-sub">BSc Computer Science · 82% average</span>
-        </span>
-        <span class="item-meta">2024 — present</span>
-      </summary>
-      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
-        <p>Active member of the university <strong>Debating Club</strong>.</p>
-        <ul class="facts">
-          <li><span>Mathematics for Computer Science</span><span class="v">87%</span></li>
-          <li><span>Formal Languages &amp; Theory of Computation</span><span class="v">89%</span></li>
-          <li><span>AI Methods</span><span class="v">100%</span></li>
-        </ul>
-        <p>My thesis will focus on <strong>Lifelong Learning in RL</strong>.</p>
-      </div></div></div>
-    </details>
+  <ul class="timeline" id="timeline">
+    <li class="entry" data-tab="about">
+      <details class="card">
+        <summary>
+          <span class="row"><span class="t">Software Engineering Intern — Bitmovin</span><span class="d">Incoming</span></span>
+          <span class="s">Video encoding and streaming infrastructure. Y Combinator S15.</span>
+        </summary>
+        <div class="body"><div class="inner"><div class="pad">
+          <p>Incoming <strong>SWE Intern at Bitmovin</strong>, working within video encoding and streaming infrastructure.</p>
+        </div></div></div>
+      </details>
+    </li>
 
-    <details class="item">
-      <summary>
-        <span class="chev"></span>
-        <span class="item-title">Buckswood School
-          <span class="item-sub">A Levels · top 10% of UK Maths students</span>
-        </span>
-        <span class="item-meta">A Levels</span>
-      </summary>
-      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
-        <p>Finished in the <strong>top 10% of all A Level Mathematics students in the UK</strong>. Held senior leadership roles and was recognised across both academic and school life.</p>
-        <ul class="facts">
-          <li><span>Student of the Year</span><span class="v">Award</span></li>
-          <li><span>Maths Student of the Year</span><span class="v">Award</span></li>
-          <li><span>Prefect &amp; House Captain</span><span class="v">Leadership</span></li>
-          <li><span>Debating Club</span><span class="v">Member</span></li>
-        </ul>
-        <ul class="facts">
-          <li><span>A Levels</span><span class="v">A*AB</span></li>
-        </ul>
-      </div></div></div>
-    </details>
-  </section>
+    <li class="entry" data-tab="research">
+      <details class="card">
+        <summary>
+          <span class="row"><span class="t">Predicting Power-Grid Outages with Deep Learning</span><span class="d">Ongoing</span></span>
+          <span class="s">Forecasting grid failure from long, noisy temporal signals. Supervised by Dr Shirin Dora.</span>
+        </summary>
+        <div class="body"><div class="inner"><div class="pad">
+          <p>Reliable early forecasting matters because it lets operators take preemptive action — switching to backup systems, redirecting load, or simply preparing. The work draws on <strong>LSTMs and RNNs</strong>, which are well-suited to the long, noisy temporal patterns that grid signals exhibit, and explores how the framing of the prediction task itself shapes how well a model can learn it.</p>
+        </div></div></div>
+      </details>
+    </li>
 
-  <!-- ============ RESEARCH ============ -->
-  <section class="section" data-screen-label="Research">
-    <div class="section-head">
-      <span class="idx">02</span>
-      <h2>Research</h2>
-    </div>
+    <li class="entry" data-tab="projects">
+      <details class="card">
+        <summary>
+          <span class="row"><span class="t">Battlefield</span><span class="d">Ongoing</span></span>
+          <span class="s">A multi-agent RL environment where countries compete over capital, land, people and oil.</span>
+        </summary>
+        <div class="body"><div class="inner"><div class="pad">
+          <p>Battlefield is a <strong>multi-agent reinforcement learning environment</strong> where countries act as agents competing over resources under constraints that loosely model international competition. The project explores what strategies emerge when agents with different priors and reward weightings interact in a shared zero-sum economy.</p>
+          <p>The motivating question came from listening to Jiang Xuequin's game-theoretic analyses of geopolitics: if states really were independent agents maximising under a zero-sum game, what would optimal play look like, and would it resemble anything we recognise? The honest answer is probably no — the environment is far too simple to model real strategic behaviour. But the simpler question is interesting in itself: what does multi-agent RL converge to under these constraints, and how do those equilibria shift as you change the resource structure or the reward shape, if they do at all?</p>
+        </div></div></div>
+      </details>
+    </li>
 
-    <details class="item" open>
-      <summary>
-        <span class="chev"></span>
-        <span class="item-title">Predicting Power-Grid Outages with Deep Learning
-          <span class="item-sub">Supervised by Dr Shirin Dora</span>
-        </span>
-        <span class="item-meta">Ongoing</span>
-      </summary>
-      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
-        <p>Using deep learning to predict power-grid outages. Reliable early forecasting matters because it lets operators take preemptive action such as switching to backup systems, redirecting load, or simply preparing. The work draws on <strong>LSTMs and RNNs</strong>, which are well-suited to the long, noisy temporal patterns that grid signals exhibit, and explores how the framing of the prediction task itself shapes how well a model can learn it.</p>
-      </div></div></div>
-    </details>
-  </section>
+    <li class="entry" data-tab="about">
+      <details class="card">
+        <summary>
+          <span class="row"><span class="t">Loughborough University</span><span class="d">2024 — present</span></span>
+          <span class="s">BSc Computer Science, 82% average. Thesis on lifelong learning in RL.</span>
+        </summary>
+        <div class="body"><div class="inner"><div class="pad">
+          <p>Active member of the university <strong>Debating Club</strong>.</p>
+          <ul class="facts">
+            <li><span>Mathematics for Computer Science</span><span class="v">87%</span></li>
+            <li><span>Formal Languages &amp; Theory of Computation</span><span class="v">89%</span></li>
+            <li><span>AI Methods</span><span class="v">100%</span></li>
+          </ul>
+          <p>My thesis will focus on <strong>Lifelong Learning in RL</strong>.</p>
+        </div></div></div>
+      </details>
+    </li>
 
-  <!-- ============ PROFESSIONAL ============ -->
-  <section class="section" data-screen-label="Professional">
-    <div class="section-head">
-      <span class="idx">03</span>
-      <h2>Professional</h2>
-    </div>
+    <li class="entry" data-tab="projects">
+      <details class="card">
+        <summary>
+          <span class="row"><span class="t">Neural Network from Scratch — MNIST</span><span class="d">96.85%</span></span>
+          <span class="s">Forward pass, backpropagation and gradient descent implemented by hand. No frameworks.</span>
+        </summary>
+        <div class="body"><div class="inner"><div class="pad">
+          <ul class="facts">
+            <li><span>Architecture</span><span class="v">784 → 512 → 512 → 128 → 10</span></li>
+            <li><span>Hidden activations</span><span class="v">ReLU</span></li>
+            <li><span>Output</span><span class="v">Softmax</span></li>
+            <li><span>Loss</span><span class="v">Cross-entropy</span></li>
+            <li><span>Built with</span><span class="v">NumPy</span></li>
+            <li><span>Final test accuracy</span><span class="v">96.85%</span></li>
+          </ul>
+          <p>NumPy handled the elementary ops and linear algebra; everything else was implemented by hand.</p>
+          <div class="links"><a href="https://github.com/jbn-creator/Neural-Network-From-Scratch" target="_blank" rel="noopener">Repository →</a></div>
+        </div></div></div>
+      </details>
+    </li>
 
-    <details class="item" open>
-      <summary>
-        <span class="chev"></span>
-        <span class="item-title">Software Engineering Intern — Bitmovin
-          <span class="item-sub">Video infrastructure · <span class="tag">YC S15</span></span>
-        </span>
-        <span class="item-meta">Incoming</span>
-      </summary>
-      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
-        <p>Incoming <strong>SWE Intern at Bitmovin</strong> (Y Combinator S15), working within video encoding and streaming infrastructure.</p>
-      </div></div></div>
-    </details>
-  </section>
+    <li class="entry" data-tab="projects">
+      <details class="card">
+        <summary>
+          <span class="row"><span class="t">Offered</span><span class="d">Archived</span></span>
+          <span class="s">Niche UK internships that never surface on the big job boards. 120 users, 3,000+ roles posted.</span>
+        </summary>
+        <div class="body"><div class="inner"><div class="pad">
+          <p><strong>Offered</strong> helped students find niche internships across the UK. Grew to <strong>120 users</strong> with over <strong>3,000 internships posted</strong>. No longer maintained.</p>
+          <ul class="facts">
+            <li><span>Stack</span><span class="v">React · Tailwind · Flask · Supabase</span></li>
+            <li><span>LLM</span><span class="v">Gemini</span></li>
+          </ul>
+          <div class="links"><a href="https://offered.org.uk/" target="_blank" rel="noopener">offered.org.uk →</a></div>
+        </div></div></div>
+      </details>
+    </li>
 
-  <!-- ============ PROJECTS ============ -->
-  <section class="section" data-screen-label="Projects">
-    <div class="section-head">
-      <span class="idx">04</span>
-      <h2>Projects</h2>
-    </div>
+    <li class="entry" data-tab="about">
+      <details class="card">
+        <summary>
+          <span class="row"><span class="t">Buckswood School</span><span class="d">A Levels</span></span>
+          <span class="s">A*AB. Top 10% of all A Level Mathematics students in the UK.</span>
+        </summary>
+        <div class="body"><div class="inner"><div class="pad">
+          <p>Held senior leadership roles and was recognised across both academic and school life.</p>
+          <ul class="facts">
+            <li><span>Student of the Year</span><span class="v">Award</span></li>
+            <li><span>Maths Student of the Year</span><span class="v">Award</span></li>
+            <li><span>Prefect &amp; House Captain</span><span class="v">Leadership</span></li>
+            <li><span>Debating Club</span><span class="v">Member</span></li>
+          </ul>
+        </div></div></div>
+      </details>
+    </li>
+  </ul>
 
-    <details class="item" open>
-      <summary>
-        <span class="chev"></span>
-        <span class="item-title">Battlefield
-          <span class="item-sub">RL simulation of global geopolitics</span>
-        </span>
-        <span class="item-meta">Ongoing</span>
-      </summary>
-      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
-        <p>Battlefield is a <strong>multi-agent reinforcement learning environment</strong> where countries act as agents competing over resources: capital, land, people, oil under constraints that loosely model international competition. The project explores what strategies emerge when agents with different priors and reward weightings interact in a shared zero-sum economy.</p>
-        <p>The motivating question came from listening to Jiang Xuequin's game-theoretic analyses of geopolitics: if states really were independent agents maximising under a zero-sum game, what would optimal play look like, and would it resemble anything we recognise? The honest answer is probably no since the environment is far too simple to model real strategic behaviour. But the simpler question is interesting in itself: what does multi-agent RL converge to under these constraints, and how do those equilibria shift as you change the resource structure or the reward shape if they do at all?</p>
-      </div></div></div>
-    </details>
-
-    <details class="item">
-      <summary>
-        <span class="chev"></span>
-        <span class="item-title">Neural Network from Scratch — MNIST
-          <span class="item-sub">No frameworks · 96.85% accuracy</span>
-        </span>
-        <span class="item-meta">96.85%</span>
-      </summary>
-      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
-        <p>Built and trained a <strong>neural network from scratch</strong> on the MNIST handwritten-digit dataset — forward pass, backpropagation and gradient descent implemented by hand.</p>
-        <ul class="facts">
-          <li><span>Architecture</span><span class="v">784 → 512 → 512 → 128 → 10</span></li>
-          <li><span>Hidden activations</span><span class="v">ReLU</span></li>
-          <li><span>Output</span><span class="v">Softmax</span></li>
-          <li><span>Loss</span><span class="v">Cross-entropy</span></li>
-          <li><span>Built with</span><span class="v">NumPy</span></li>
-          <li><span>Final test accuracy</span><span class="v">96.85%</span></li>
-        </ul>
-        <p>NumPy handled the elementary ops and linear algebra; everything else was implemented by hand.</p>
-        <div class="links"><a href="https://github.com/jbn-creator/Neural-Network-From-Scratch" target="_blank" rel="noopener">Repository →</a></div>
-      </div></div></div>
-    </details>
-
-    <details class="item">
-      <summary>
-        <span class="chev"></span>
-        <span class="item-title">Offered
-          <span class="item-sub">120 users · 3,000+ internships posted</span>
-        </span>
-        <span class="item-meta">Product</span>
-      </summary>
-      <div class="body-wrap"><div class="body-inner"><div class="body-pad">
-        <p><strong>Offered</strong> is a platform to help students find <strong>niche internships across the UK</strong> that rarely surface on the big job boards. Grew to <strong>120 users</strong> with over <strong>3,000 internships posted</strong>. No longer maintained.</p>
-        <ul class="facts">
-          <li><span>Stack</span><span class="v">React · Tailwind · Flask · Supabase</span></li>
-          <li><span>LLM</span><span class="v">Gemini</span></li>
-        </ul>
-        <div class="links"><a href="https://offered.org.uk/" target="_blank" rel="noopener">offered.org.uk →</a></div>
-      </div></div></div>
-    </details>
-  </section>
+  <div class="contact">
+    <a href="assets/Joshua-Bakata-CV.pdf" target="_blank" rel="noopener">Download CV ↓</a>
+    <a href="mailto:J.N.Bakata1-24@student.lboro.ac.uk">Email</a>
+    <a href="https://github.com/jbn-creator/" target="_blank" rel="noopener">GitHub</a>
+  </div>
 
   <footer>
     <span>© 2026 Joshua Bakata</span>
     <a href="mailto:J.N.Bakata1-24@student.lboro.ac.uk">J.N.Bakata1-24@student.lboro.ac.uk</a>
   </footer>
-</main>
+</div>
 
 <script>
 /* ---------- theme ---------- */
 (function () {
   const root = document.documentElement;
   const btn = document.getElementById('themeToggle');
-  const label = document.getElementById('themeLabel');
-  const saved = localStorage.getItem('jb-theme');
-  if (saved) root.setAttribute('data-theme', saved);
-  const sync = () => { label.textContent = root.getAttribute('data-theme') === 'dark' ? 'Dark' : 'Light'; };
+  const saved = localStorage.getItem('jb-theme')
+    || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const sync = () => { btn.textContent = root.dataset.theme === 'dark' ? 'Light' : 'Dark'; };
+  root.dataset.theme = saved;
   sync();
   btn.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    localStorage.setItem('jb-theme', next);
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('jb-theme', root.dataset.theme);
     sync();
   });
 })();
 
-/* ---------- expand / collapse all ---------- */
+/* ---------- tabs (hash-routed filter over one list) ---------- */
 (function () {
-  const btn = document.getElementById('expandAll');
-  if (!btn) return;
-  const items = () => Array.from(document.querySelectorAll('details.item'));
-  const allOpen = () => items().every(d => d.open);
-  function refresh() {
-    const open = allOpen();
-    btn.textContent = open ? 'Collapse all' : 'Expand all';
-    btn.setAttribute('aria-expanded', String(open));
+  const links = document.querySelectorAll('#tabs a');
+  const entries = document.querySelectorAll('.entry');
+  function route() {
+    const tab = (location.hash.slice(1) || 'home');
+    const known = [...links].some(a => a.hash === '#' + tab) ? tab : 'home';
+    entries.forEach(e => { e.hidden = known !== 'home' && e.dataset.tab !== known; });
+    links.forEach(a => a.hash === '#' + known
+      ? a.setAttribute('aria-current', 'page')
+      : a.removeAttribute('aria-current'));
+    document.getElementById('intro').hidden = known !== 'home';
   }
-  btn.addEventListener('click', () => {
-    const open = !allOpen();
-    items().forEach(d => { d.open = open; });
-    refresh();
-  });
-  document.addEventListener('toggle', (e) => {
-    if (e.target.classList && e.target.classList.contains('item')) refresh();
-  }, true);
-  refresh();
-})();
-
-/* ---------- node / wire background ---------- */
-(function () {
-  const canvas = document.getElementById('net');
-  const ctx = canvas.getContext('2d');
-  let w, h, dpr, nodes = [], raf;
-  const COUNT_BASE = 0.00009; // nodes per px²
-  const LINK_DIST = 170;
-
-  function netColor() {
-    return getComputedStyle(document.documentElement).getPropertyValue('--net').trim() || '12,12,13';
-  }
-
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth; h = window.innerHeight;
-    canvas.width = w * dpr; canvas.height = h * dpr;
-    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const target = Math.max(26, Math.min(80, Math.round(w * h * COUNT_BASE)));
-    nodes = [];
-    for (let i = 0; i < target; i++) {
-      nodes.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.16,
-        vy: (Math.random() - 0.5) * 0.16,
-        r: Math.random() * 1.4 + 0.7
-      });
-    }
-  }
-
-  function step() {
-    ctx.clearRect(0, 0, w, h);
-    const c = netColor();
-    for (const n of nodes) {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
-      if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
-    }
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const d = Math.hypot(dx, dy);
-        if (d < LINK_DIST) {
-          const o = (1 - d / LINK_DIST) * 0.28;
-          ctx.strokeStyle = 'rgba(' + c + ',' + o.toFixed(3) + ')';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
-      }
-    }
-    for (const n of nodes) {
-      ctx.fillStyle = 'rgba(' + c + ',0.5)';
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    raf = requestAnimationFrame(step);
-  }
-
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  resize();
-  if (reduce) { step(); cancelAnimationFrame(raf); } else { step(); }
-  let rt;
-  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+  addEventListener('hashchange', route);
+  route();
 })();
 </script>
 </body>
