@@ -39,8 +39,9 @@
   }
 
   .wrap {
-    max-width: 880px;
-    padding: clamp(32px, 6vh, 64px) 28px 120px clamp(28px, 5vw, 64px);
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(32px, 6vh, 64px) clamp(24px, 5vw, 72px) 120px;
   }
 
   /* ---------- header ---------- */
@@ -162,12 +163,12 @@
   .row { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
   .t { font-weight: 500; }
   .d { color: var(--muted); font-size: 13.5px; white-space: nowrap; }
-  .s { display: block; color: var(--muted); margin-top: 4px; text-wrap: pretty; }
+  .s { display: block; color: var(--muted); margin-top: 4px; max-width: 92ch; text-wrap: pretty; }
 
   .body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
   .card[open] .body { grid-template-rows: 1fr; }
   .inner { overflow: hidden; }
-  .pad { padding: 4px 16px 18px; max-width: 62ch; }
+  .pad { padding: 4px 16px 18px; max-width: 88ch; }
   .pad p { margin: 0 0 12px; color: var(--muted); text-wrap: pretty; }
   .pad p:last-child { margin-bottom: 0; }
   .pad strong { color: var(--ink); font-weight: 500; }
