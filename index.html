@@ -1,392 +1,641 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Joshua Bakata</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #f2f0ea;
-    --ink: #14140f;
-    --muted: #6f6f66;
-    --faint: #9a9a91;
-    --line: rgba(20,20,15,0.22);
-    --line-soft: rgba(20,20,15,0.12);
-    --serif: "Spectral", "Times New Roman", Times, serif;
-    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  }
-  [data-theme="dark"] {
-    --bg: #101010;
-    --ink: #edebe4;
-    --muted: #918f87;
-    --faint: #6a6963;
-    --line: rgba(237,235,228,0.26);
-    --line-soft: rgba(237,235,228,0.13);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joshua Bakata</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Spectral:wght@300;400&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f2f0ea;
+      --ink: #14140f;
+      --muted: #6f6f66;
+      --faint: #9a9a91;
+      --line: rgba(20, 20, 15, 0.22);
+      --line-soft: rgba(20, 20, 15, 0.12);
+      --serif: "Spectral", "Times New Roman", Times, serif;
+      --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    }
 
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--mono);
-    font-size: 15px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
+    [data-theme="dark"] {
+      --bg: #101010;
+      --ink: #edebe4;
+      --muted: #918f87;
+      --faint: #6a6963;
+      --line: rgba(237, 235, 228, 0.26);
+      --line-soft: rgba(237, 235, 228, 0.13);
+    }
 
-  .wrap {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: clamp(32px, 6vh, 64px) clamp(24px, 5vw, 72px) 120px;
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  /* ---------- header ---------- */
-  .top {
-    display: flex;
-    align-items: baseline;
-    gap: clamp(20px, 5vw, 64px);
-    margin-bottom: 44px;
-    flex-wrap: wrap;
-  }
-  .wordmark {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(30px, 4.4vw, 42px);
-    letter-spacing: -0.01em;
-    margin: 0;
-  }
-  .tabs { display: flex; gap: 22px; }
-  .tabs a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 15px;
-    border-bottom: 1px solid var(--line-soft);
-    padding-bottom: 3px;
-  }
-  .tabs a:hover { color: var(--ink); border-color: var(--line); }
-  .tabs a[aria-current="page"] { color: var(--ink); border-bottom: 1.5px solid var(--ink); }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 15px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .theme {
-    margin-left: auto;
-    appearance: none;
-    background: transparent;
-    border: 1px solid var(--line);
-    color: var(--muted);
-    font: inherit;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    padding: 4px 11px;
-    cursor: pointer;
-  }
-  .theme:hover { color: var(--ink); border-color: var(--ink); }
+    .wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: clamp(32px, 6vh, 64px) clamp(24px, 5vw, 72px) 120px;
+    }
 
-  .intro {
-    max-width: 54ch;
-    margin: 0 0 14px;
-    text-wrap: pretty;
-  }
+    /* ---------- header ---------- */
+    .top {
+      display: flex;
+      align-items: baseline;
+      gap: clamp(20px, 5vw, 64px);
+      margin-bottom: 44px;
+      flex-wrap: wrap;
+    }
 
-  /* ---------- socials ---------- */
-  .socials { display: flex; gap: 4px; margin: 0 0 48px -8px; }
-  .socials a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px; height: 34px;
-    border-radius: 50px;
-    color: var(--ink);
-    transition: background-color 0.25s, color 0.25s;
-  }
-  .socials svg { width: 17px; height: 17px; }
-  .socials a:hover, .socials a:focus-visible { color: #fff; animation: pop 0.4s linear; }
-  .socials .gh:hover, .socials .gh:focus-visible { background-color: #1a1e22; }
-  .socials .li:hover, .socials .li:focus-visible { background-color: #0a66c2; }
-  .socials .ml:hover, .socials .ml:focus-visible { background-color: #ea4335; }
-  @keyframes pop {
-    40% { transform: scale(1.25); }
-    60% { transform: scale(0.85); }
-    80% { transform: scale(1.12); }
-    100% { transform: scale(1); }
-  }
+    .wordmark {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(30px, 4.4vw, 42px);
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
 
-  /* ---------- timeline ---------- */
-  .timeline {
-    list-style: none;
-    margin: 0;
-    padding: 0 0 0 34px;
-    position: relative;
-  }
-  .timeline::before {
-    content: "";
-    position: absolute;
-    left: 0; top: 12px; bottom: 12px;
-    width: 1px;
-    background: var(--line-soft);
-  }
-  .entry { position: relative; margin-bottom: 6px; }
-  .entry::before {
-    content: "";
-    position: absolute;
-    left: -38px; top: 22px;
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--ink);
-  }
-  .entry[hidden] { display: none; }
+    .tabs {
+      display: flex;
+      gap: 22px;
+    }
 
-  .card {
-    border: 1px solid transparent;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
-  }
-  .card > summary {
-    list-style: none;
-    cursor: pointer;
-    display: block;
-    padding: 12px 16px 14px;
-  }
-  .card > summary::-webkit-details-marker { display: none; }
-  .card:hover, .card[open] {
-    border-color: var(--ink);
-    box-shadow: 5px 5px 0 var(--ink);
-    transform: translate(-1px, -1px);
-  }
-  .card > summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    .tabs a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 15px;
+      border-bottom: 1px solid var(--line-soft);
+      padding-bottom: 3px;
+    }
 
-  .row { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
-  .t { font-weight: 500; }
-  .d { color: var(--muted); font-size: 13.5px; white-space: nowrap; }
-  .s { display: block; color: var(--muted); margin-top: 4px; max-width: 92ch; text-wrap: pretty; }
+    .tabs a:hover {
+      color: var(--ink);
+      border-color: var(--line);
+    }
 
-  .body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
-  .card[open] .body { grid-template-rows: 1fr; }
-  .inner { overflow: hidden; }
-  .pad { padding: 4px 16px 18px; max-width: 88ch; }
-  .pad p { margin: 0 0 12px; color: var(--muted); text-wrap: pretty; }
-  .pad p:last-child { margin-bottom: 0; }
-  .pad strong { color: var(--ink); font-weight: 500; }
+    .tabs a[aria-current="page"] {
+      color: var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+    }
 
-  .facts { list-style: none; margin: 0 0 14px; padding: 0; border-top: 1px solid var(--line-soft); }
-  .facts li {
-    display: flex; justify-content: space-between; gap: 18px;
-    padding: 7px 0;
-    border-bottom: 1px solid var(--line-soft);
-    font-size: 14px;
-  }
-  .facts li .v { color: var(--muted); text-align: right; }
+    .theme {
+      margin-left: auto;
+      appearance: none;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font: inherit;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      padding: 4px 11px;
+      cursor: pointer;
+    }
 
-  .links { margin-top: 12px; font-size: 14px; }
-  .links a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-soft); padding-bottom: 2px; }
-  .links a:hover { border-color: var(--ink); }
+    .theme:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
 
-  footer {
-    margin-top: 72px;
-    padding-top: 20px;
-    border-top: 1px solid var(--line-soft);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-    font-size: 13px;
-    color: var(--faint);
-  }
-  footer a { color: var(--muted); text-decoration: none; }
-  footer a:hover { color: var(--ink); }
+    .intro {
+      max-width: 54ch;
+      margin: 0 0 14px;
+      text-wrap: pretty;
+    }
 
-  @media (max-width: 620px) {
-    .row { flex-direction: column; gap: 2px; }
-    .timeline { padding-left: 24px; }
-    .entry::before { left: -28px; }
-    .theme { margin-left: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .body, .card { transition: none; }
-    .card:hover, .card[open] { transform: none; }
-  }
-</style>
+    /* ---------- socials ---------- */
+    .socials {
+      display: flex;
+      gap: 4px;
+      margin: 0 0 48px -8px;
+    }
+
+    .socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50px;
+      color: var(--ink);
+      transition: background-color 0.25s, color 0.25s;
+    }
+
+    .socials svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .socials a:hover,
+    .socials a:focus-visible {
+      color: #fff;
+      animation: pop 0.4s linear;
+    }
+
+    .socials .gh:hover,
+    .socials .gh:focus-visible {
+      background-color: #1a1e22;
+    }
+
+    .socials .li:hover,
+    .socials .li:focus-visible {
+      background-color: #0a66c2;
+    }
+
+    .socials .ml:hover,
+    .socials .ml:focus-visible {
+      background-color: #ea4335;
+    }
+
+    @keyframes pop {
+      40% {
+        transform: scale(1.25);
+      }
+
+      60% {
+        transform: scale(0.85);
+      }
+
+      80% {
+        transform: scale(1.12);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* ---------- timeline ---------- */
+    .timeline {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 0 34px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      bottom: 12px;
+      width: 1px;
+      background: var(--line-soft);
+    }
+
+    .entry {
+      position: relative;
+      margin-bottom: 6px;
+    }
+
+    .entry::before {
+      content: "";
+      position: absolute;
+      left: -38px;
+      top: 22px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .entry[hidden] {
+      display: none;
+    }
+
+    .card {
+      border: 1px solid transparent;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .card>summary {
+      list-style: none;
+      cursor: pointer;
+      display: block;
+      padding: 12px 16px 14px;
+    }
+
+    .card>summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .card:hover,
+    .card[open] {
+      border-color: var(--ink);
+      box-shadow: 5px 5px 0 var(--ink);
+      transform: translate(-1px, -1px);
+    }
+
+    .card>summary:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+
+    .card.static>.head {
+      padding: 12px 16px 14px;
+    }
+
+    .card.static:hover {
+      border-color: transparent;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .t {
+      font-weight: 500;
+    }
+
+    .d {
+      color: var(--muted);
+      font-size: 13.5px;
+      white-space: nowrap;
+    }
+
+    .s {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+      max-width: 92ch;
+      text-wrap: pretty;
+    }
+
+    .body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.28s ease;
+    }
+
+    .card[open] .body {
+      grid-template-rows: 1fr;
+    }
+
+    .inner {
+      overflow: hidden;
+    }
+
+    .pad {
+      padding: 4px 16px 18px;
+      max-width: 88ch;
+    }
+
+    .pad p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      text-wrap: pretty;
+    }
+
+    .pad p:last-child {
+      margin-bottom: 0;
+    }
+
+    .pad strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .facts {
+      list-style: none;
+      margin: 0 0 14px;
+      padding: 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .facts li {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--line-soft);
+      font-size: 14px;
+    }
+
+    .facts li .v {
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .links {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .links a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line-soft);
+      padding-bottom: 2px;
+    }
+
+    .links a:hover {
+      border-color: var(--ink);
+    }
+
+    footer {
+      margin-top: 72px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line-soft);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--faint);
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--ink);
+    }
+
+    @media (max-width: 620px) {
+      .row {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .timeline {
+        padding-left: 24px;
+      }
+
+      .entry::before {
+        left: -28px;
+      }
+
+      .theme {
+        margin-left: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .body,
+      .card {
+        transition: none;
+      }
+
+      .card:hover,
+      .card[open] {
+        transform: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="wrap">
-  <header class="top">
-    <h1 class="wordmark">Joshua Bakata</h1>
-    <nav class="tabs" id="tabs">
-      <a href="#home">Home</a>
-      <a href="#research">Research</a>
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-    </nav>
-    <button class="theme" id="themeToggle" aria-label="Toggle colour theme">Dark</button>
-  </header>
+  <div class="wrap">
+    <header class="top">
+      <h1 class="wordmark">Joshua Bakata</h1>
+      <nav class="tabs" id="tabs">
+        <a href="#home">Home</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </nav>
+      <button class="theme" id="themeToggle" aria-label="Toggle colour theme">Dark</button>
+    </header>
 
-  <p class="intro" id="intro">
-    Hi, welcome to my portfolio! I enjoy learning — if you do too, please reach out to me!
-  </p>
+    <p class="intro" id="intro">
+      Hi, welcome to my portfolio! I enjoy learning if you do too, please reach out to me!
+    </p>
 
-  <div class="socials">
-    <a class="li" href="https://www.linkedin.com/in/joshuabakata/" target="_blank" rel="noopener" aria-label="LinkedIn">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path></svg>
-    </a>
-    <a class="ml" href="mailto:J.N.Bakata1-24@student.lboro.ac.uk" aria-label="Email">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect><path d="m3.5 7 8.5 6 8.5-6"></path></svg>
-    </a>
-    <a class="gh" href="https://github.com/jbn-creator" target="_blank" rel="noopener" aria-label="GitHub">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill="currentColor" aria-hidden="true"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
-    </a>
+    <div class="socials">
+      <a class="li" href="https://www.linkedin.com/in/joshuabakata/" target="_blank" rel="noopener"
+        aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true">
+          <path
+            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
+          </path>
+        </svg>
+      </a>
+      <a class="ml" href="mailto:J.N.Bakata1-24@student.lboro.ac.uk" aria-label="Email">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="4.5" width="19" height="15" rx="2.5"></rect>
+          <path d="m3.5 7 8.5 6 8.5-6"></path>
+        </svg>
+      </a>
+      <a class="gh" href="https://github.com/jbn-creator" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill="currentColor" aria-hidden="true">
+          <path
+            d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+          </path>
+        </svg>
+      </a>
+    </div>
+
+    <ul class="timeline" id="timeline">
+      <li class="entry" data-tab="about" data-home>
+        <details class="card">
+          <summary>
+            <span class="row"><span class="t">Software Engineering Intern — Bitmovin</span><span class="d">Jul — Aug 2026</span></span>
+            <span class="s">An end-to-end observability platform for diagnosing viewer Quality of Experience. Austria ·
+              Y Combinator S15.</span>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="pad">
+                <p>Built an <strong>end-to-end observability platform</strong> correlating encoder, CDN, DRM and player
+                  analytics to diagnose the root causes of viewer <strong>Quality of Experience</strong> degradation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="entry" data-tab="research" data-home>
+        <details class="card">
+          <summary>
+            <span class="row"><span class="t">Predicting Power-Grid Outages with Deep Learning</span><span
+                class="d">Mar — Aug 2026</span></span>
+            <span class="s">Forecasting grid failure from long, noisy temporal signals. Supervised by Dr Shirin
+              Dora.</span>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="pad">
+                <p>Reliable early forecasting matters because it lets operators take preemptive action — switching to
+                  backup systems, redirecting load, or simply preparing. The work draws on <strong>LSTMs and
+                    RNNs</strong>, which are well-suited to the long, noisy temporal patterns that grid signals exhibit,
+                  and explores how the framing of the prediction task itself shapes how well a model can learn it.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="entry" data-tab="projects">
+        <div class="card static">
+          <div class="head">
+            <span class="row"><span class="t">Damian</span><span class="d">Ongoing</span></span>
+            <span class="s">An autonomous agent which investigates any given website/app for UI/UX issues and finds out
+              what could be improved, as well as suggesting new features.</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="entry" data-tab="about" data-home>
+        <details class="card">
+          <summary>
+            <span class="row"><span class="t">Loughborough University</span><span class="d">2024 — present</span></span>
+            <span class="s">BSc Computer Science, 82% average. Thesis on lifelong learning in RL.</span>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="pad">
+                <p>Active member of the university <strong>Debating Club</strong>.</p>
+                <ul class="facts">
+                  <li><span>Mathematics for Computer Science</span><span class="v">87%</span></li>
+                  <li><span>Formal Languages &amp; Theory of Computation</span><span class="v">89%</span></li>
+                  <li><span>AI Methods</span><span class="v">100%</span></li>
+                </ul>
+                <p>My thesis will focus on <strong>Lifelong Learning in RL</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="entry" data-tab="projects">
+        <details class="card">
+          <summary>
+            <span class="row"><span class="t">Neural Network from Scratch — MNIST</span><span
+                class="d">96.85%</span></span>
+            <span class="s">Forward pass, backpropagation and gradient descent implemented by hand. No
+              frameworks.</span>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="pad">
+                <ul class="facts">
+                  <li><span>Architecture</span><span class="v">784 → 512 → 512 → 128 → 10</span></li>
+                  <li><span>Hidden activations</span><span class="v">ReLU</span></li>
+                  <li><span>Output</span><span class="v">Softmax</span></li>
+                  <li><span>Loss</span><span class="v">Cross-entropy</span></li>
+                  <li><span>Built with</span><span class="v">NumPy</span></li>
+                  <li><span>Final test accuracy</span><span class="v">96.85%</span></li>
+                </ul>
+                <p>NumPy handled the elementary ops and linear algebra; everything else was implemented by hand.</p>
+                <div class="links"><a href="https://github.com/jbn-creator/Neural-Network-From-Scratch" target="_blank"
+                    rel="noopener">Repository →</a></div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="entry" data-tab="projects">
+        <details class="card">
+          <summary>
+            <span class="row"><span class="t">Offered</span><span class="d">Archived</span></span>
+            <span class="s">Niche UK internships that never surface on the big job boards. 120 users, 3,000+ roles
+              posted.</span>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="pad">
+                <p><strong>Offered</strong> helped students find niche internships across the UK. Grew to <strong>120
+                    users</strong> with over <strong>3,000 internships posted</strong>. No longer maintained.</p>
+                <ul class="facts">
+                  <li><span>Stack</span><span class="v">React · Tailwind · Flask · Supabase</span></li>
+                  <li><span>LLM</span><span class="v">Gemini</span></li>
+                </ul>
+                <div class="links"><a href="https://offered.org.uk/" target="_blank" rel="noopener">offered.org.uk →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </li>
+
+      <li class="entry" data-tab="about">
+        <details class="card">
+          <summary>
+            <span class="row"><span class="t">Buckswood School</span><span class="d">2022 — 2024</span></span>
+            <span class="s">A Levels in Mathematics, French and Business. Hastings, East Sussex.</span>
+          </summary>
+          <div class="body">
+            <div class="inner">
+              <div class="pad">
+                <p>Held senior leadership roles and was recognised across both academic and school life.</p>
+                <ul class="facts">
+                  <li><span>Student of the Year</span><span class="v">Award</span></li>
+                  <li><span>Maths Student of the Year</span><span class="v">Award</span></li>
+                  <li><span>Prefect &amp; House Captain</span><span class="v">Leadership</span></li>
+                  <li><span>Debating Club</span><span class="v">Member</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </details>
+      </li>
+    </ul>
+
+    <footer>
+      <span>© 2026 Joshua Bakata</span>
+      <a href="mailto:J.N.Bakata1-24@student.lboro.ac.uk">J.N.Bakata1-24@student.lboro.ac.uk</a>
+    </footer>
   </div>
 
-  <ul class="timeline" id="timeline">
-    <li class="entry" data-tab="about">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Software Engineering Intern — Bitmovin</span><span class="d">Summer 2026</span></span>
-          <span class="s">An end-to-end observability platform for diagnosing viewer Quality of Experience. Austria · Y Combinator S15.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Built an <strong>end-to-end observability platform</strong> correlating encoder, CDN, DRM and player analytics to diagnose the root causes of viewer <strong>Quality of Experience</strong> degradation.</p>
-          <p>Integrated heterogeneous data sources — Bitmovin, AWS MediaLive, Akamai, CloudFront, Fastly and player telemetry — behind a unified <strong>MCP server abstraction layer</strong>, then built an AI agent and its MCP tool to autonomously surface QoE diagnoses into an internal Slack channel.</p>
-        </div></div></div>
-      </details>
-    </li>
+  <script>
+    /* ---------- theme ---------- */
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('jb-theme')
+        || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const sync = () => { btn.textContent = root.dataset.theme === 'dark' ? 'Light' : 'Dark'; };
+      root.dataset.theme = saved;
+      sync();
+      btn.addEventListener('click', () => {
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('jb-theme', root.dataset.theme);
+        sync();
+      });
+    })();
 
-    <li class="entry" data-tab="research">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Predicting Power-Grid Outages with Deep Learning</span><span class="d">Ongoing</span></span>
-          <span class="s">Forecasting grid failure from long, noisy temporal signals. Supervised by Dr Shirin Dora.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Reliable early forecasting matters because it lets operators take preemptive action — switching to backup systems, redirecting load, or simply preparing. The work draws on <strong>LSTMs and RNNs</strong>, which are well-suited to the long, noisy temporal patterns that grid signals exhibit, and explores how the framing of the prediction task itself shapes how well a model can learn it.</p>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="projects">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Battlefield</span><span class="d">Ongoing</span></span>
-          <span class="s">A multi-agent RL environment where countries compete over capital, land, people and oil.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Battlefield is a <strong>multi-agent reinforcement learning environment</strong> where countries act as agents competing over resources under constraints that loosely model international competition. The project explores what strategies emerge when agents with different priors and reward weightings interact in a shared zero-sum economy.</p>
-          <p>The motivating question came from listening to Jiang Xuequin's game-theoretic analyses of geopolitics: if states really were independent agents maximising under a zero-sum game, what would optimal play look like, and would it resemble anything we recognise? The honest answer is probably no — the environment is far too simple to model real strategic behaviour. But the simpler question is interesting in itself: what does multi-agent RL converge to under these constraints, and how do those equilibria shift as you change the resource structure or the reward shape, if they do at all?</p>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="about">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Loughborough University</span><span class="d">2024 — present</span></span>
-          <span class="s">BSc Computer Science, 82% average. Thesis on lifelong learning in RL.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Active member of the university <strong>Debating Club</strong>.</p>
-          <ul class="facts">
-            <li><span>Mathematics for Computer Science</span><span class="v">87%</span></li>
-            <li><span>Formal Languages &amp; Theory of Computation</span><span class="v">89%</span></li>
-            <li><span>AI Methods</span><span class="v">100%</span></li>
-          </ul>
-          <p>My thesis will focus on <strong>Lifelong Learning in RL</strong>.</p>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="projects">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Neural Network from Scratch — MNIST</span><span class="d">96.85%</span></span>
-          <span class="s">Forward pass, backpropagation and gradient descent implemented by hand. No frameworks.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <ul class="facts">
-            <li><span>Architecture</span><span class="v">784 → 512 → 512 → 128 → 10</span></li>
-            <li><span>Hidden activations</span><span class="v">ReLU</span></li>
-            <li><span>Output</span><span class="v">Softmax</span></li>
-            <li><span>Loss</span><span class="v">Cross-entropy</span></li>
-            <li><span>Built with</span><span class="v">NumPy</span></li>
-            <li><span>Final test accuracy</span><span class="v">96.85%</span></li>
-          </ul>
-          <p>NumPy handled the elementary ops and linear algebra; everything else was implemented by hand.</p>
-          <div class="links"><a href="https://github.com/jbn-creator/Neural-Network-From-Scratch" target="_blank" rel="noopener">Repository →</a></div>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="projects">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Offered</span><span class="d">Archived</span></span>
-          <span class="s">Niche UK internships that never surface on the big job boards. 120 users, 3,000+ roles posted.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p><strong>Offered</strong> helped students find niche internships across the UK. Grew to <strong>120 users</strong> with over <strong>3,000 internships posted</strong>. No longer maintained.</p>
-          <ul class="facts">
-            <li><span>Stack</span><span class="v">React · Tailwind · Flask · Supabase</span></li>
-            <li><span>LLM</span><span class="v">Gemini</span></li>
-          </ul>
-          <div class="links"><a href="https://offered.org.uk/" target="_blank" rel="noopener">offered.org.uk →</a></div>
-        </div></div></div>
-      </details>
-    </li>
-
-    <li class="entry" data-tab="about">
-      <details class="card">
-        <summary>
-          <span class="row"><span class="t">Buckswood School</span><span class="d">2022 — 2024</span></span>
-          <span class="s">A Levels in Mathematics, French and Business. Hastings, East Sussex.</span>
-        </summary>
-        <div class="body"><div class="inner"><div class="pad">
-          <p>Held senior leadership roles and was recognised across both academic and school life.</p>
-          <ul class="facts">
-            <li><span>Student of the Year</span><span class="v">Award</span></li>
-            <li><span>Maths Student of the Year</span><span class="v">Award</span></li>
-            <li><span>Prefect &amp; House Captain</span><span class="v">Leadership</span></li>
-            <li><span>Debating Club</span><span class="v">Member</span></li>
-          </ul>
-        </div></div></div>
-      </details>
-    </li>
-  </ul>
-
-  <footer>
-    <span>© 2026 Joshua Bakata</span>
-    <a href="mailto:J.N.Bakata1-24@student.lboro.ac.uk">J.N.Bakata1-24@student.lboro.ac.uk</a>
-  </footer>
-</div>
-
-<script>
-/* ---------- theme ---------- */
-(function () {
-  const root = document.documentElement;
-  const btn = document.getElementById('themeToggle');
-  const saved = localStorage.getItem('jb-theme')
-    || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  const sync = () => { btn.textContent = root.dataset.theme === 'dark' ? 'Light' : 'Dark'; };
-  root.dataset.theme = saved;
-  sync();
-  btn.addEventListener('click', () => {
-    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('jb-theme', root.dataset.theme);
-    sync();
-  });
-})();
-
-/* ---------- tabs (hash-routed filter over one list) ---------- */
-(function () {
-  const links = document.querySelectorAll('#tabs a');
-  const entries = document.querySelectorAll('.entry');
-  function route() {
-    const tab = (location.hash.slice(1) || 'home');
-    const known = [...links].some(a => a.hash === '#' + tab) ? tab : 'home';
-    entries.forEach(e => { e.hidden = known !== 'home' && e.dataset.tab !== known; });
-    links.forEach(a => a.hash === '#' + known
-      ? a.setAttribute('aria-current', 'page')
-      : a.removeAttribute('aria-current'));
-    document.getElementById('intro').hidden = known !== 'home';
-  }
-  addEventListener('hashchange', route);
-  route();
-})();
-</script>
+    /* ---------- tabs (hash-routed filter over one list) ---------- */
+    (function () {
+      const links = document.querySelectorAll('#tabs a');
+      const entries = document.querySelectorAll('.entry');
+      function route() {
+        const tab = (location.hash.slice(1) || 'home');
+        const known = [...links].some(a => a.hash === '#' + tab) ? tab : 'home';
+        entries.forEach(e => {
+          e.hidden = known === 'home' ? !('home' in e.dataset) : e.dataset.tab !== known;
+        });
+        links.forEach(a => a.hash === '#' + known
+          ? a.setAttribute('aria-current', 'page')
+          : a.removeAttribute('aria-current'));
+        document.getElementById('intro').hidden = known !== 'home';
+      }
+      addEventListener('hashchange', route);
+      route();
+    })();
+  </script>
 </body>
+
 </html>
